@@ -1,24 +1,16 @@
-import { Module } from '@nestjs/common';
-import { AppController } from './app.controller';
-import { AppService } from './app.service';
+import { NgModule } from '@angular/core';
+import { BrowserModule } from '@angular/platform-browser';
 
-@Module({
-  imports: [],
-  controllers: [AppController],
-  providers: [AppService],
+import { AppComponent } from './app.component';
+
+@NgModule({
+  declarations: [
+    AppComponent
+  ],
+  imports: [
+    BrowserModule
+  ],
+  providers: [],
+  bootstrap: [AppComponent]
 })
-export class AppModule {}
-
-
-
-
-// import { Module } from '@nestjs/common';
-// import { AppController } from './app.controller';
-// import { AppService } from './app.service';
-
-// @Module({
-//   imports: [],
-//   controllers: [AppController],
-//   providers: [AppService],
-// })
-// export class AppModule {}
+export class AppModule { }

@@ -1,4 +1,35 @@
-<div class="quiz">
+<!-- app.component.html -->
+
+<h1>Quiz</h1>
+
+<!-- Display the current score -->
+<p>Current score: {{ score }}</p>
+
+<!-- Display the current question -->
+<p *ngIf="currentQuestion !== null">
+  Question {{ currentQuestion + 1 }} of {{ totalQuestions }}:
+</p>
+
+<!-- Display the current question and a list of possible answers -->
+<div *ngIf="currentQuestion !== null">
+  <p>{{ questions[currentQuestion] }}</p>
+  <ul>
+    <li *ngFor="let answer of answers[currentQuestion]; let i = index">
+      <button (click)="submitAnswer(currentQuestion, i)">{{ answer }}</button>
+    </li>
+  </ul>
+</div>
+
+<!-- Display a message when the quiz is completed -->
+<p *ngIf="currentQuestion === null">Quiz completed!</p>
+
+
+
+
+
+
+
+<!-- <div class="quiz">
   <h1>Quiz</h1>
   <p>Score: {{ score }} / {{ totalQuestions }}</p>
   <p>Question {{ currentQuestion + 1 }}: {{ question }}</p>
@@ -8,6 +39,6 @@
     </li>
   </ul>
   <button (click)="submitAnswer()">Submit</button>
-</div>
+</div> -->
 
 
