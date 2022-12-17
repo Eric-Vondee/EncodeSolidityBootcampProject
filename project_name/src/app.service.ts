@@ -1,6 +1,13 @@
 import { Injectable } from '@nestjs/common';
 import { providers, Contract, utils } from 'ethers';
-import Quiz from 'packages/blockchain/contracts/';
+import Quiz from '../../../packages/blockchain/contracts/Quiz';
+import { Observable, of } from 'rxjs';
+// import Quiz from '/Users/one/Documents/HARDHAT/EncodeSolidityBootcampProject/packages/blockchain/contracts/Quiz.sol ';
+
+
+// import { AppService } from '../../../project-name/src/app.service';
+
+
 @Injectable()
 export class AppService {
   private provider: providers.JsonRpcProvider;
@@ -15,22 +22,23 @@ export class AppService {
       this.provider.getSigner()
     );
   }
+  getScore(): Observable<number> {
+  return of(this.contract.score);
+}
 
-  // other methods here
+  // async getScore(): Promise<number> {
+  //   // Get the current score from the contract
+  //   return await this.contract.score();
+  // }
 
-  async getScore(): Promise<number> {
-    // Get the current score from the contract
-    return await this.contract.score();
-  }
-
-  async getTotalQuestions(): Promise<number> {
+   getTotalQuestions(): Observable<number> {
     // Get the total number of questions from the contract
-    return await this.contract.totalQuestions();
+    return  this.contract.totalQuestions();
   }
 
-  async getCurrentQuestion(): Promise<number> {
+   getCurrentQuestion(): Observable<number> {
     // Get the current question index from the contract
-    return await this.contract.currentQuestion();
+    return  this.contract.currentQuestion();
   }
 
   async getQuestions(): Promise<string[]> {
