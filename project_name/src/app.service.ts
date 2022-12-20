@@ -1,12 +1,10 @@
 import { Injectable } from '@nestjs/common';
 import { providers, Contract, utils } from 'ethers';
-import Quiz from '../../../packages/blockchain/contracts/Quiz';
-import { Observable, of } from 'rxjs';
-// import Quiz from '/Users/one/Documents/HARDHAT/EncodeSolidityBootcampProject/packages/blockchain/contracts/Quiz.sol ';
 
-
-// import { AppService } from '../../../project-name/src/app.service';
-
+const ABI = [
+  "function createQuestion(uint256 _questionId, bytes32 _hash) public",
+  "function verifyAnswers(uint256 _questionId, bytes32 _hash) public"
+]
 
 @Injectable()
 export class AppService {
@@ -15,15 +13,15 @@ export class AppService {
 
   constructor() {
     // Initialize provider and contract
-    this.provider = new providers.JsonRpcProvider('http://localhost:8545');
+    this.provider = new providers.JsonRpcProvider('https://eth-goerli.g.alchemy.com/v2/2gFT6chsEQG2kndo4-j8vGnIk6l0dxA5');
     this.contract = new Contract(
-      Quiz.address, // use the contract's address
-      Quiz.abi, // use the contract's ABI
-      this.provider.getSigner()
+      "0xf1bb59dbc4f38933824b4474c05cd11f1ad7a43a", // use the contract's address
+      ABI, // use the contract's ABI
+      this.provider
     );
   }
-  getScore(): Observable<number> {
-  return of(this.contract.score);
+  getScore(): number {
+  return (this.contract.score);
 }
 
   // async getScore(): Promise<number> {
@@ -31,12 +29,12 @@ export class AppService {
   //   return await this.contract.score();
   // }
 
-   getTotalQuestions(): Observable<number> {
+   getTotalQuestions(): number {
     // Get the total number of questions from the contract
     return  this.contract.totalQuestions();
   }
 
-   getCurrentQuestion(): Observable<number> {
+   getCurrentQuestion(): number {
     // Get the current question index from the contract
     return  this.contract.currentQuestion();
   }
