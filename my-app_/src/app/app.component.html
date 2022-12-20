@@ -1,44 +1,28 @@
-<!-- app.component.html -->
+<div class="px-4 py-5 my-5 text-center">
+  <h1 class="display-5 fw-bold">{{title}}</h1>
 
-<h1>Quiz</h1>
-
-<!-- Display the current score -->
-<p>Current score: {{ score }}</p>
-
-<!-- Display the current question -->
-<p *ngIf="currentQuestion !== null">
-  Question {{ currentQuestion + 1 }} of {{ totalQuestions }}:
-</p>
-
-<!-- Display the current question and a list of possible answers -->
-<div *ngIf="currentQuestion !== null">
-  <p>{{ questions[currentQuestion] }}</p>
-  <ul>
-    <li *ngFor="let answer of answers[currentQuestion]; let i = index">
-      <button (click)="submitAnswer(currentQuestion, i)">{{ answer }}</button>
-    </li>
-  </ul>
+  <h2 class="text-[3em] font-bold" *ngIf="!walletConnected">Connect Ethereum Wallet</h2>
+  <h2 class="text-[3em] font-bold" *ngIf="walletConnected">Connected Ethereum Wallet</h2>
+  <button *ngIf="!walletConnected"class="btn btn-success btn-lg px-4 gap-3"(click)="connectToWallet()">Connect Wallet</button>
+    <div *ngIf="walletConnected" class="bg-gradient-to-r from-green-500 
+    to-blue-500 p-[2em] rounded-xl">
+    <p> <label >This is your wallet: {{walletId}}</label></p>
+      <label > Now, you can start the quiz:</label>
+    </div>
 </div>
 
-<!-- Display a message when the quiz is completed -->
-<p *ngIf="currentQuestion === null">Quiz completed!</p>
-
-
-
-
-
-
-
-<!-- <div class="quiz">
+<div class="quiz text-center">
   <h1>Quiz</h1>
   <p>Score: {{ score }} / {{ totalQuestions }}</p>
-  <p>Question {{ currentQuestion + 1 }}: {{ question }}</p>
+  <p>Question {{ currentQuestion }}: {{ question }}</p>
   <ul>
     <li *ngFor="let answer of answers; index as i">
-      <input type="radio" name="answer" [(ngModel)]="userAnswer" [value]="i"> {{ answer }}
+      <!-- <input type="radio" name="answer" [(ngModel)]="userAnswer" [value]="i">  -->
+      <input type="radio" name="answer" [value]="i"> 
+      {{ answer }}
     </li>
   </ul>
   <button (click)="submitAnswer()">Submit</button>
-</div> -->
+</div>
 
 
